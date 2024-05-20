@@ -372,9 +372,12 @@ void inject_payload(struct thread *td) {
     file_copy(td, PAYLOAD_EXT_PATH, PAYLOAD_INT_PATH);
   }
 
-  if (file_exists(td, PAYLOAD_INT_PATH)) {
-    exec_payload(td, PAYLOAD_INT_PATH);
+  if (!file_exists(td, PAYLOAD_INT_PATH)) {
+      notify("Payload not found!");
+      return;
   }
+
+  exec_payload(td, PAYLOAD_INT_PATH);
 }
 
 void stage2(void) {
