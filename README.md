@@ -22,7 +22,8 @@ The exploit only prints `PPPwned` on your PS4 as a proof-of-concept. In order to
 - Ethernet cable
 - Linux
   - You can use VirtualBox to create a Linux VM with `Bridged Adapter` as network adapter to use the ethernet port in the VM.
-- Python3 and gcc installed
+- `git`, `gcc` and `make` installed
+- *(Optional. Not required if you only want to compile the payloads.)* `python3` and `pip` installed
 
 ## Usage
 
@@ -38,12 +39,6 @@ Change the directory to the cloned repository:
 cd PPPwn
 ```
 
-Install the requirements:
-
-```sh
-sudo pip install -r requirements.txt
-```
-
 Compile the payloads:
 
 ```sh
@@ -52,6 +47,12 @@ make -C stage2 FW=1100 clean && make -C stage2 FW=1100
 ```
 
 For other firmwares, e.g. FW 9.00, pass `FW=900`.
+
+If you further want to run the exploit from within this repository, install the requirements:
+
+```sh
+sudo pip install -r requirements.txt
+```
 
 DO NOT RUN the exploit just yet (don't press Enter yet) but prepare this command on your prompt (see `ifconfig` for the correct interface):
 
