@@ -223,6 +223,7 @@ static void create_dir(struct thread *td, const char *dir) {
 
   char tmp[256];
   char *p = NULL;
+  mode_t mode = S_IRWXU | S_IRWXG | S_IRWXO;
   size_t len;
 
   snprintf(tmp, sizeof(tmp), "%s", dir);
@@ -234,13 +235,13 @@ static void create_dir(struct thread *td, const char *dir) {
   for (p = tmp + 1; *p; p++) {
     if (*p == '/') {
       *p = '\0';
-      ksys_mkdir(td, tmp, S_IRWXU);
+      ksys_mkdir(td, tmp, mode);
       *p = '/';
     }
   }
 
   if (dir[len - 1] == '/') {
-    ksys_mkdir(td, tmp, S_IRWXU);
+    ksys_mkdir(td, tmp, mode);
   }
 }
 
