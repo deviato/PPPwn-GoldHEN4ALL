@@ -31,12 +31,12 @@
 #define kdlsym_addr_copyinstr_patch2 0xffffffff8222f73f
 #define kdlsym_addr_copyinstr_patch3 0xffffffff8222f770
 
-#deviato-adds
+/*deviato-adds*/
 #define kdlsym_addr_kernel_map 0xffffffff843c8ee0
 #define kdlsym_addr_kmem_alloc 0xffffffff823170f0
 #define kdlsym_addr_kmem_free 0xffffffff823172c0
-#missing kdlsym_addr_sceKernelSendNotificationRequest 0xffffffff
-#missing kdlsym_addr_vsprintf 0xffffffff
+//missing kdlsym_addr_sceKernelSendNotificationRequest 0xffffffff
+//missing kdlsym_addr_vsprintf 0xffffffff
 #define kdlsym_addr_snprintf 0xffffffff822bca30
 #define kdlsym_addr_strlen 0xffffffff82293ff0
 
