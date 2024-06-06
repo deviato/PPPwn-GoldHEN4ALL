@@ -195,7 +195,28 @@ static int ksys_stat(struct thread *td, const char *path, struct stat *ub) {
   return td->td_retval[0];
 }
 
-void notify(const char *fmt, ...)
+/* Replaced with TheFlow version, because of missing offsets */
+void notify(const char *fmt, ...) {
+  OrbisNotificationRequest ntfy={};
+  ntfy.targetId=-1;
+  ntfy.useIconImageUri=1;
+  memcpy(&ntfy.message,fmt,sizeof(fmt));
+  
+  struct thread *td=curthread;
+  
+  int fd;
+  fd=ksys_open(td,"/dev/notification0",O_WRONLY,0);
+  if(!fd) fd=ksys_open(td,"/dev/notification0",O_WRONLY|O_NONBLOCK,0);
+  if(!fd) fd=ksys_open(td,"/dev/notification1",O_WRONLY,0);
+  if(!fd) fd=ksys_open(td,"/dev/notification1",O_WRONLY|O_NONBLOCK,0);
+
+  if(fd) {
+    ksys_write(td,fd,&ntfy,sizeof(ntfy));
+    ksys_close(td,fd);
+  }
+}
+
+/*void notify(const char *fmt, ...)
 {
   uint64_t kaslr_offset = rdmsr(MSR_LSTAR) - kdlsym_addr_Xfast_syscall;
   int (*sceKernelSendNotificationRequest)(int device, OrbisNotificationRequest* req, int size , int blocking) = (void *)kdlsym(sceKernelSendNotificationRequest);
@@ -214,7 +235,7 @@ void notify(const char *fmt, ...)
   buf.targetId = -1;
 
   sceKernelSendNotificationRequest(0, &buf, sizeof(buf), 0);
-}
+}*/
 
 static void create_dir(struct thread *td, const char *dir) {
   uint64_t kaslr_offset = rdmsr(MSR_LSTAR) - kdlsym_addr_Xfast_syscall;
