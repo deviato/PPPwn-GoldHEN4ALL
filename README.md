@@ -173,5 +173,15 @@ This has been tested using VMware Fusion 13.5.1, with the VM Guest as Ubuntu 24.
 
 ## Notes for GoldHEN version
 This loader only supports payloads with a kernel entrypoint.
-The custom version of stage2 first looks for the payload in the root directory of the USB drive, and if found, it is copied to the internal HDD at this path: /data/GoldHEN/payloads/goldhen.bin. The internal payload is then loaded and is no longer needed on the external USB drive.
-At the moment, only firmware versions 9.00, 10.00, 10.01 and 11.00 are supported. Other versions like 9.60 will also be supported.
+
+The custom version of stage2 first looks for the payload in the root directory of the USB drive, and if found, it is copied to the internal HDD at this path: `/data/GoldHEN/payloads/goldhen.bin`. The internal payload is then loaded and is no longer needed on the external USB drive.
+
+Supported versions are:
+- FW 9.00
+- FW 9.60
+- FW 10.00 / 10.01
+- FW 11.00
+
+Next versions are:
+- FW 10.50
+- TBD
